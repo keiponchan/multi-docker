@@ -3,20 +3,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t keiju/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t iamhkisn/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true keiju/react-test npm run test -- --coverage
+  - docker run -e CI=true iamhkisn/react-test npm run test -- --coverage
 
 after_success:
-  - docker build -t keiju/multi-client ./client
-  - docker build -t keiju/multi-nginx ./nginx
-  - docker build -t keiju/multi-server ./server
-  - docker build -t keiju/multi-worker ./worker
+  - docker build -t iamhkisn/multi-client ./client
+  - docker build -t iamhkisn/multi-nginx ./nginx
+  - docker build -t iamhkisn/multi-server ./server
+  - docker build -t iamhkisn/multi-worker ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push keiju/multi-client
-  - docker push keiju/multi-nginx
-  - docker push keiju/multi-server
-  - docker push keiju/multi-worker
+  - docker push iamhkisn/multi-client
+  - docker push iamhkisn/multi-nginx
+  - docker push iamhkisn/multi-server
+  - docker push iamhkisn/multi-worker
